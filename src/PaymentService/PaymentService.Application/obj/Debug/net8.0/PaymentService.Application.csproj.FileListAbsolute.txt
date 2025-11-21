@@ -1,0 +1,15 @@
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/bin/Debug/net8.0/PaymentService.Application.deps.json
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/bin/Debug/net8.0/PaymentService.Application.dll
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/bin/Debug/net8.0/PaymentService.Application.pdb
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/bin/Debug/net8.0/PaymentService.Domain.dll
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/bin/Debug/net8.0/PaymentService.Domain.pdb
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/PaymentService.Application.csproj.AssemblyReference.cache
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/PaymentService.Application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/PaymentService.Application.AssemblyInfoInputs.cache
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/PaymentService.Application.AssemblyInfo.cs
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/PaymentService.Application.csproj.CoreCompileInputs.cache
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/PaymentS.03DFC2EE.Up2Date
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/PaymentService.Application.dll
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/refint/PaymentService.Application.dll
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/PaymentService.Application.pdb
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/ref/PaymentService.Application.dll

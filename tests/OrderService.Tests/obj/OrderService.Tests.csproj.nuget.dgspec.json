@@ -1,0 +1,389 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/sametkustul/Repos/MicroserviceMaster/tests/OrderService.Tests/OrderService.Tests.csproj": {}
+  },
+  "projects": {
+    "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.API/OrderService.API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.API/OrderService.API.csproj",
+        "projectName": "OrderService.API",
+        "projectPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.API/OrderService.API.csproj",
+        "packagesPath": "/Users/sametkustul/.nuget/packages/",
+        "outputPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.API/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/sametkustul/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Application/OrderService.Application.csproj": {
+                "projectPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Application/OrderService.Application.csproj"
+              },
+              "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Infrastructure/OrderService.Infrastructure.csproj": {
+                "projectPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Infrastructure/OrderService.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/sametkustul/.dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Application/OrderService.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Application/OrderService.Application.csproj",
+        "projectName": "OrderService.Application",
+        "projectPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Application/OrderService.Application.csproj",
+        "packagesPath": "/Users/sametkustul/.nuget/packages/",
+        "outputPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Application/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/sametkustul/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/OrderService.Domain.csproj": {
+                "projectPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/OrderService.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/sametkustul/.dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/OrderService.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/OrderService.Domain.csproj",
+        "projectName": "OrderService.Domain",
+        "projectPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/OrderService.Domain.csproj",
+        "packagesPath": "/Users/sametkustul/.nuget/packages/",
+        "outputPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/sametkustul/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/sametkustul/.dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Infrastructure/OrderService.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Infrastructure/OrderService.Infrastructure.csproj",
+        "projectName": "OrderService.Infrastructure",
+        "projectPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Infrastructure/OrderService.Infrastructure.csproj",
+        "packagesPath": "/Users/sametkustul/.nuget/packages/",
+        "outputPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/sametkustul/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Application/OrderService.Application.csproj": {
+                "projectPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Application/OrderService.Application.csproj"
+              },
+              "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/OrderService.Domain.csproj": {
+                "projectPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/OrderService.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.8.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/sametkustul/.dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/sametkustul/Repos/MicroserviceMaster/tests/OrderService.Tests/OrderService.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/sametkustul/Repos/MicroserviceMaster/tests/OrderService.Tests/OrderService.Tests.csproj",
+        "projectName": "OrderService.Tests",
+        "projectPath": "/Users/sametkustul/Repos/MicroserviceMaster/tests/OrderService.Tests/OrderService.Tests.csproj",
+        "packagesPath": "/Users/sametkustul/.nuget/packages/",
+        "outputPath": "/Users/sametkustul/Repos/MicroserviceMaster/tests/OrderService.Tests/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/sametkustul/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.API/OrderService.API.csproj": {
+                "projectPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.API/OrderService.API.csproj"
+              },
+              "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Application/OrderService.Application.csproj": {
+                "projectPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Application/OrderService.Application.csproj"
+              },
+              "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/OrderService.Domain.csproj": {
+                "projectPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/OrderService.Domain.csproj"
+              },
+              "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Infrastructure/OrderService.Infrastructure.csproj": {
+                "projectPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Infrastructure/OrderService.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.8.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.70, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[4.0.1, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/sametkustul/.dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

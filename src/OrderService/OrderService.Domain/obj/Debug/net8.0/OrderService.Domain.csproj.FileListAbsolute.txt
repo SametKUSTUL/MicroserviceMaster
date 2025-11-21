@@ -1,0 +1,11 @@
+/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/obj/Debug/net8.0/OrderService.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/obj/Debug/net8.0/OrderService.Domain.AssemblyInfoInputs.cache
+/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/obj/Debug/net8.0/OrderService.Domain.AssemblyInfo.cs
+/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/obj/Debug/net8.0/OrderService.Domain.csproj.CoreCompileInputs.cache
+/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/bin/Debug/net8.0/OrderService.Domain.deps.json
+/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/bin/Debug/net8.0/OrderService.Domain.dll
+/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/bin/Debug/net8.0/OrderService.Domain.pdb
+/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/obj/Debug/net8.0/OrderService.Domain.dll
+/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/obj/Debug/net8.0/refint/OrderService.Domain.dll
+/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/obj/Debug/net8.0/OrderService.Domain.pdb
+/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/obj/Debug/net8.0/ref/OrderService.Domain.dll
