@@ -13,3 +13,4 @@
 /Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Application/obj/Debug/net8.0/refint/OrderService.Application.dll
 /Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Application/obj/Debug/net8.0/OrderService.Application.pdb
 /Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Application/obj/Debug/net8.0/ref/OrderService.Application.dll
+/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Application/obj/Debug/net8.0/OrderService.Application.sourcelink.json

@@ -1,6 +1,7 @@
 using Moq;
 using NUnit.Framework;
 using PaymentService.Application.Commands;
+using PaymentService.Application.Configuration;
 using PaymentService.Application.Handlers;
 using PaymentService.Application.Services;
 using PaymentService.Domain.Entities;
@@ -20,7 +21,8 @@ public class ProcessPaymentHandlerTests
     {
         _repositoryMock = new Mock<IPaymentRepository>();
         _publisherMock = new Mock<IMessagePublisher>();
-        _handler = new ProcessPaymentHandler(_repositoryMock.Object, _publisherMock.Object);
+        var settings = new MessagingSettings { PaymentCompletedRoutingKey = "payment.completed" };
+        _handler = new ProcessPaymentHandler(_repositoryMock.Object, _publisherMock.Object, settings);
     }
 
     [Test]
