@@ -1,6 +1,7 @@
 using Moq;
 using NUnit.Framework;
 using OrderService.Application.Commands;
+using OrderService.Application.Configuration;
 using OrderService.Application.Handlers;
 using OrderService.Application.Services;
 using OrderService.Domain.Entities;
@@ -20,7 +21,8 @@ public class CreateOrderHandlerTests
     {
         _repositoryMock = new Mock<IOrderRepository>();
         _publisherMock = new Mock<IMessagePublisher>();
-        _handler = new CreateOrderHandler(_repositoryMock.Object, _publisherMock.Object);
+        var settings = new MessagingSettings { OrderCreatedRoutingKey = "order.created" };
+        _handler = new CreateOrderHandler(_repositoryMock.Object, _publisherMock.Object, settings);
     }
 
     [Test]

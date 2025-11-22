@@ -16,18 +16,20 @@ public class RabbitMqConsumer : IMessageConsumer, IDisposable
     private readonly IModel _channel;
     private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<RabbitMqConsumer> _logger;
+    private readonly string _queueName;
 
-    public RabbitMqConsumer(string hostName, IServiceProvider serviceProvider, ILogger<RabbitMqConsumer> logger)
+    public RabbitMqConsumer(string hostName, string exchangeName, string queueName, string routingKey, IServiceProvider serviceProvider, ILogger<RabbitMqConsumer> logger)
     {
         _serviceProvider = serviceProvider;
         _logger = logger;
+        _queueName = queueName;
         var factory = new ConnectionFactory { HostName = hostName };
         _connection = factory.CreateConnection();
         _channel = _connection.CreateModel();
         
-        _channel.ExchangeDeclare("order_exchange", ExchangeType.Topic, durable: true);
-        _channel.QueueDeclare("payment_queue", durable: true, exclusive: false, autoDelete: false);
-        _channel.QueueBind("payment_queue", "order_exchange", "order.created");
+        _channel.ExchangeDeclare(exchangeName, ExchangeType.Topic, durable: true);
+        _channel.QueueDeclare(queueName, durable: true, exclusive: false, autoDelete: false);
+        _channel.QueueBind(queueName, exchangeName, routingKey);
     }
 
     public Task StartAsync(CancellationToken cancellationToken)
@@ -63,7 +65,7 @@ public class RabbitMqConsumer : IMessageConsumer, IDisposable
             }
         };
 
-        _channel.BasicConsume("payment_queue", false, consumer);
+        _channel.BasicConsume(_queueName, false, consumer);
         return Task.CompletedTask;
     }
 

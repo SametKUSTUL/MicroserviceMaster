@@ -1,5 +1,6 @@
 using MediatR;
 using PaymentService.Application.Commands;
+using PaymentService.Application.Configuration;
 using PaymentService.Application.Services;
 using PaymentService.Domain.Entities;
 using PaymentService.Domain.Repositories;
@@ -10,11 +11,13 @@ public class ProcessPaymentHandler : IRequestHandler<ProcessPaymentCommand, Paym
 {
     private readonly IPaymentRepository _repository;
     private readonly IMessagePublisher _messagePublisher;
+    private readonly MessagingSettings _settings;
 
-    public ProcessPaymentHandler(IPaymentRepository repository, IMessagePublisher messagePublisher)
+    public ProcessPaymentHandler(IPaymentRepository repository, IMessagePublisher messagePublisher, MessagingSettings settings)
     {
         _repository = repository;
         _messagePublisher = messagePublisher;
+        _settings = settings;
     }
 
     public async Task<Payment> Handle(ProcessPaymentCommand request, CancellationToken cancellationToken)
@@ -37,7 +40,7 @@ public class ProcessPaymentHandler : IRequestHandler<ProcessPaymentCommand, Paym
         result.ProcessedAt = DateTime.UtcNow;
         await _repository.UpdateAsync(result, cancellationToken);
 
-        await _messagePublisher.PublishAsync("payment.completed", new
+        await _messagePublisher.PublishAsync(_settings.PaymentCompletedRoutingKey, new
         {
             PaymentId = result.Id,
             OrderId = result.OrderId,

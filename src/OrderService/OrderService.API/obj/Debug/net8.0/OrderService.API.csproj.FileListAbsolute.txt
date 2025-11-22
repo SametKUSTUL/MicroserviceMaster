@@ -114,3 +114,4 @@
 /Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.API/obj/Debug/net8.0/OrderService.API.pdb
 /Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.API/obj/Debug/net8.0/OrderService.API.genruntimeconfig.cache
 /Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.API/obj/Debug/net8.0/ref/OrderService.API.dll
+/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.API/obj/Debug/net8.0/OrderService.API.sourcelink.json

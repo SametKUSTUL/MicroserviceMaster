@@ -9,3 +9,4 @@
 /Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/obj/Debug/net8.0/refint/OrderService.Domain.dll
 /Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/obj/Debug/net8.0/OrderService.Domain.pdb
 /Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/obj/Debug/net8.0/ref/OrderService.Domain.dll
+/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Domain/obj/Debug/net8.0/OrderService.Domain.sourcelink.json

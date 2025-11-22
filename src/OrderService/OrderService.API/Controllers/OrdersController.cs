@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OrderService.Application.Commands;
-using OrderService.Domain.Repositories;
+using OrderService.Application.Queries;
 
 namespace OrderService.API.Controllers;
 
@@ -10,25 +10,23 @@ namespace OrderService.API.Controllers;
 public class OrdersController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly IOrderRepository _repository;
 
-    public OrdersController(IMediator mediator, IOrderRepository repository)
+    public OrdersController(IMediator mediator)
     {
         _mediator = mediator;
-        _repository = repository;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
-        var orders = await _repository.GetAllAsync(cancellationToken);
+        var orders = await _mediator.Send(new GetAllOrdersQuery(), cancellationToken);
         return Ok(orders);
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken)
     {
-        var order = await _repository.GetByIdAsync(id, cancellationToken);
+        var order = await _mediator.Send(new GetOrderByIdQuery(id), cancellationToken);
         return order == null ? NotFound() : Ok(order);
     }
 

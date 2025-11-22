@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using OrderService.Application.Services;
 using OrderService.Domain.Entities;
 using OrderService.Domain.Repositories;
+using OrderService.Infrastructure.Configuration;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
@@ -16,19 +17,21 @@ public class RabbitMqConsumer : IMessageConsumer, IDisposable
     private readonly IModel _channel;
     private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<RabbitMqConsumer> _logger;
+    private readonly string _queueName;
 
-    public RabbitMqConsumer(string hostName, IServiceProvider serviceProvider, ILogger<RabbitMqConsumer> logger)
+    public RabbitMqConsumer(RabbitMqSettings settings, IServiceProvider serviceProvider, ILogger<RabbitMqConsumer> logger)
     {
         _serviceProvider = serviceProvider;
         _logger = logger;
-        var factory = new ConnectionFactory { HostName = hostName };
+        _queueName = settings.OrderPaymentQueue;
+        var factory = new ConnectionFactory { HostName = settings.Host };
         _connection = factory.CreateConnection();
         _channel = _connection.CreateModel();
         
-        _channel.ExchangeDeclare("payment_exchange", ExchangeType.Topic, durable: true);
-        _channel.QueueDeclare("order_payment_queue", durable: true, exclusive: false, autoDelete: false);
-        _channel.QueueBind("order_payment_queue", "payment_exchange", "payment.completed");
-        _channel.QueueBind("order_payment_queue", "payment_exchange", "payment.failed");
+        _channel.ExchangeDeclare(settings.PaymentExchange, ExchangeType.Topic, durable: true);
+        _channel.QueueDeclare(_queueName, durable: true, exclusive: false, autoDelete: false);
+        _channel.QueueBind(_queueName, settings.PaymentExchange, settings.PaymentCompletedRoutingKey);
+        _channel.QueueBind(_queueName, settings.PaymentExchange, settings.PaymentFailedRoutingKey);
     }
 
     public Task StartAsync(CancellationToken cancellationToken)
@@ -67,7 +70,7 @@ public class RabbitMqConsumer : IMessageConsumer, IDisposable
             }
         };
 
-        _channel.BasicConsume("order_payment_queue", false, consumer);
+        _channel.BasicConsume(_queueName, false, consumer);
         return Task.CompletedTask;
     }
 

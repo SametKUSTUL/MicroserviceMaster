@@ -1,5 +1,6 @@
 using MediatR;
 using OrderService.Application.Commands;
+using OrderService.Application.Configuration;
 using OrderService.Application.Services;
 using OrderService.Domain.Entities;
 using OrderService.Domain.Repositories;
@@ -10,11 +11,13 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Order>
 {
     private readonly IOrderRepository _repository;
     private readonly IMessagePublisher _messagePublisher;
+    private readonly MessagingSettings _settings;
 
-    public CreateOrderHandler(IOrderRepository repository, IMessagePublisher messagePublisher)
+    public CreateOrderHandler(IOrderRepository repository, IMessagePublisher messagePublisher, MessagingSettings settings)
     {
         _repository = repository;
         _messagePublisher = messagePublisher;
+        _settings = settings;
     }
 
     public async Task<Order> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
@@ -38,7 +41,7 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Order>
 
         var result = await _repository.AddAsync(order, cancellationToken);
         
-        await _messagePublisher.PublishAsync("order.created", new
+        await _messagePublisher.PublishAsync(_settings.OrderCreatedRoutingKey, new
         {
             OrderId = result.Id,
             CustomerId = result.CustomerId,

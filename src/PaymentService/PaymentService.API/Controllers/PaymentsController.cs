@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PaymentService.Application.Commands;
-using PaymentService.Domain.Repositories;
+using PaymentService.Application.Queries;
 
 namespace PaymentService.API.Controllers;
 
@@ -10,32 +10,30 @@ namespace PaymentService.API.Controllers;
 public class PaymentsController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly IPaymentRepository _repository;
 
-    public PaymentsController(IMediator mediator, IPaymentRepository repository)
+    public PaymentsController(IMediator mediator)
     {
         _mediator = mediator;
-        _repository = repository;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
-        var payments = await _repository.GetAllAsync(cancellationToken);
+        var payments = await _mediator.Send(new GetAllPaymentsQuery(), cancellationToken);
         return Ok(payments);
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken)
     {
-        var payment = await _repository.GetByIdAsync(id, cancellationToken);
+        var payment = await _mediator.Send(new GetPaymentByIdQuery(id), cancellationToken);
         return payment == null ? NotFound() : Ok(payment);
     }
 
     [HttpGet("order/{orderId}")]
     public async Task<IActionResult> GetByOrderId(Guid orderId, CancellationToken cancellationToken)
     {
-        var payment = await _repository.GetByOrderIdAsync(orderId, cancellationToken);
+        var payment = await _mediator.Send(new GetPaymentByOrderIdQuery(orderId), cancellationToken);
         return payment == null ? NotFound() : Ok(payment);
     }
 

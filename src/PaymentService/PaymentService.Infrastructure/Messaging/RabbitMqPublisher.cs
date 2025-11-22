@@ -9,13 +9,15 @@ public class RabbitMqPublisher : IMessagePublisher, IDisposable
 {
     private readonly IConnection _connection;
     private readonly IModel _channel;
+    private readonly string _exchangeName;
 
-    public RabbitMqPublisher(string hostName)
+    public RabbitMqPublisher(string hostName, string exchangeName)
     {
+        _exchangeName = exchangeName;
         var factory = new ConnectionFactory { HostName = hostName };
         _connection = factory.CreateConnection();
         _channel = _connection.CreateModel();
-        _channel.ExchangeDeclare("payment_exchange", ExchangeType.Topic, durable: true);
+        _channel.ExchangeDeclare(_exchangeName, ExchangeType.Topic, durable: true);
     }
 
     public async Task PublishAsync<T>(string routingKey, T message, CancellationToken cancellationToken = default)
@@ -24,7 +26,7 @@ public class RabbitMqPublisher : IMessagePublisher, IDisposable
         var body = Encoding.UTF8.GetBytes(json);
 
         await Task.Run(() => _channel.BasicPublish(
-            exchange: "payment_exchange",
+            exchange: _exchangeName,
             routingKey: routingKey,
             basicProperties: null,
             body: body), cancellationToken);
