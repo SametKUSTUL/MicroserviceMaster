@@ -1,0 +1,83 @@
+{
+  "version": 2,
+  "dgSpecHash": "pAx+KG4Epe0=",
+  "success": true,
+  "projectFilePath": "/Users/sametkustul/Repos/MicroserviceMaster/src/Shared/Observability/Observability.csproj",
+  "expectedPackageFiles": [
+    "/Users/sametkustul/.nuget/packages/elasticsearch.net/7.17.5/elasticsearch.net.7.17.5.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/google.protobuf/3.22.5/google.protobuf.3.22.5.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/grpc.core.api/2.52.0/grpc.core.api.2.52.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/grpc.net.client/2.52.0/grpc.net.client.2.52.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/grpc.net.common/2.52.0/grpc.net.common.2.52.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/microsoft.csharp/4.6.0/microsoft.csharp.4.6.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/microsoft.extensions.configuration/8.0.0/microsoft.extensions.configuration.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/microsoft.extensions.configuration.abstractions/8.0.0/microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/microsoft.extensions.configuration.binder/8.0.0/microsoft.extensions.configuration.binder.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/microsoft.extensions.dependencyinjection/8.0.0/microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/microsoft.extensions.dependencymodel/8.0.0/microsoft.extensions.dependencymodel.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/microsoft.extensions.diagnostics.abstractions/8.0.0/microsoft.extensions.diagnostics.abstractions.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/microsoft.extensions.fileproviders.abstractions/8.0.0/microsoft.extensions.fileproviders.abstractions.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/microsoft.extensions.hosting.abstractions/8.0.0/microsoft.extensions.hosting.abstractions.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/microsoft.extensions.logging/8.0.0/microsoft.extensions.logging.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.0/microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/microsoft.extensions.logging.configuration/8.0.0/microsoft.extensions.logging.configuration.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/microsoft.extensions.options/8.0.0/microsoft.extensions.options.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/microsoft.extensions.options.configurationextensions/8.0.0/microsoft.extensions.options.configurationextensions.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/microsoft.extensions.primitives/8.0.0/microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/opentelemetry/1.7.0/opentelemetry.1.7.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/opentelemetry.api/1.7.0/opentelemetry.api.1.7.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/opentelemetry.api.providerbuilderextensions/1.7.0/opentelemetry.api.providerbuilderextensions.1.7.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/opentelemetry.exporter.console/1.7.0/opentelemetry.exporter.console.1.7.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/opentelemetry.exporter.opentelemetryprotocol/1.7.0/opentelemetry.exporter.opentelemetryprotocol.1.7.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/opentelemetry.extensions.hosting/1.7.0/opentelemetry.extensions.hosting.1.7.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/opentelemetry.instrumentation.aspnetcore/1.7.1/opentelemetry.instrumentation.aspnetcore.1.7.1.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/opentelemetry.instrumentation.http/1.7.1/opentelemetry.instrumentation.http.1.7.1.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/serilog/3.1.1/serilog.3.1.1.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/serilog.aspnetcore/8.0.0/serilog.aspnetcore.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/serilog.enrichers.environment/2.3.0/serilog.enrichers.environment.2.3.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/serilog.enrichers.span/3.1.0/serilog.enrichers.span.3.1.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/serilog.extensions.hosting/8.0.0/serilog.extensions.hosting.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/serilog.extensions.logging/8.0.0/serilog.extensions.logging.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/serilog.formatting.compact/2.0.0/serilog.formatting.compact.2.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/serilog.formatting.elasticsearch/10.0.0/serilog.formatting.elasticsearch.10.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/serilog.settings.configuration/8.0.0/serilog.settings.configuration.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/serilog.sinks.console/5.0.1/serilog.sinks.console.5.0.1.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/serilog.sinks.debug/2.0.0/serilog.sinks.debug.2.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/serilog.sinks.elasticsearch/10.0.0/serilog.sinks.elasticsearch.10.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/serilog.sinks.file/5.0.0/serilog.sinks.file.5.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/serilog.sinks.periodicbatching/4.0.0/serilog.sinks.periodicbatching.4.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/system.diagnostics.diagnosticsource/8.0.0/system.diagnostics.diagnosticsource.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/system.text.encodings.web/8.0.0/system.text.encodings.web.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/system.text.json/8.0.0/system.text.json.8.0.0.nupkg.sha512",
+    "/Users/sametkustul/.nuget/packages/system.threading.channels/8.0.0/system.threading.channels.8.0.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1902",
+      "level": "Warning",
+      "message": "Package 'OpenTelemetry.Instrumentation.AspNetCore' 1.7.1 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-vh2m-22xx-q94f",
+      "projectPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/Shared/Observability/Observability.csproj",
+      "warningLevel": 1,
+      "filePath": "/Users/sametkustul/Repos/MicroserviceMaster/src/Shared/Observability/Observability.csproj",
+      "libraryId": "OpenTelemetry.Instrumentation.AspNetCore",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    },
+    {
+      "code": "NU1902",
+      "level": "Warning",
+      "message": "Package 'OpenTelemetry.Instrumentation.Http' 1.7.1 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-vh2m-22xx-q94f",
+      "projectPath": "/Users/sametkustul/Repos/MicroserviceMaster/src/Shared/Observability/Observability.csproj",
+      "warningLevel": 1,
+      "filePath": "/Users/sametkustul/Repos/MicroserviceMaster/src/Shared/Observability/Observability.csproj",
+      "libraryId": "OpenTelemetry.Instrumentation.Http",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+/Users/sametkustul/Repos/MicroserviceMaster/src/Shared/Observability/bin/Debug/net8.0/Observability.deps.json
+/Users/sametkustul/Repos/MicroserviceMaster/src/Shared/Observability/bin/Debug/net8.0/Observability.dll
+/Users/sametkustul/Repos/MicroserviceMaster/src/Shared/Observability/bin/Debug/net8.0/Observability.pdb
+/Users/sametkustul/Repos/MicroserviceMaster/src/Shared/Observability/obj/Debug/net8.0/Observability.csproj.AssemblyReference.cache
+/Users/sametkustul/Repos/MicroserviceMaster/src/Shared/Observability/obj/Debug/net8.0/Observability.GeneratedMSBuildEditorConfig.editorconfig
+/Users/sametkustul/Repos/MicroserviceMaster/src/Shared/Observability/obj/Debug/net8.0/Observability.AssemblyInfoInputs.cache
+/Users/sametkustul/Repos/MicroserviceMaster/src/Shared/Observability/obj/Debug/net8.0/Observability.AssemblyInfo.cs
+/Users/sametkustul/Repos/MicroserviceMaster/src/Shared/Observability/obj/Debug/net8.0/Observability.csproj.CoreCompileInputs.cache
+/Users/sametkustul/Repos/MicroserviceMaster/src/Shared/Observability/obj/Debug/net8.0/Observability.sourcelink.json
+/Users/sametkustul/Repos/MicroserviceMaster/src/Shared/Observability/obj/Debug/net8.0/Observability.dll
+/Users/sametkustul/Repos/MicroserviceMaster/src/Shared/Observability/obj/Debug/net8.0/refint/Observability.dll
+/Users/sametkustul/Repos/MicroserviceMaster/src/Shared/Observability/obj/Debug/net8.0/Observability.pdb
+/Users/sametkustul/Repos/MicroserviceMaster/src/Shared/Observability/obj/Debug/net8.0/ref/Observability.dll
