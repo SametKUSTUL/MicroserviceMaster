@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using PaymentService.Application.Commands;
@@ -14,6 +15,7 @@ public class ProcessPaymentHandlerTests
 {
     private Mock<IPaymentRepository> _repositoryMock;
     private Mock<IMessagePublisher> _publisherMock;
+    private Mock<ILogger<ProcessPaymentHandler>> _loggerMock;
     private ProcessPaymentHandler _handler;
 
     [SetUp]
@@ -21,8 +23,9 @@ public class ProcessPaymentHandlerTests
     {
         _repositoryMock = new Mock<IPaymentRepository>();
         _publisherMock = new Mock<IMessagePublisher>();
+        _loggerMock = new Mock<ILogger<ProcessPaymentHandler>>();
         var settings = new MessagingSettings { PaymentCompletedRoutingKey = "payment.completed" };
-        _handler = new ProcessPaymentHandler(_repositoryMock.Object, _publisherMock.Object, settings);
+        _handler = new ProcessPaymentHandler(_repositoryMock.Object, _publisherMock.Object, settings, _loggerMock.Object);
     }
 
     [Test]
