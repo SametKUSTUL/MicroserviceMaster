@@ -1,8 +1,12 @@
+using Observability;
 using PaymentService.API.BackgroundServices;
 using PaymentService.API.Extensions;
+using PaymentService.API.Middleware;
 using PaymentService.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddObservability("PaymentService");
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -25,7 +29,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseAuthorization();
 app.MapControllers();
 
-app.Run();
+try
+{
+    app.Run();
+}
+finally
+{
+    Serilog.Log.CloseAndFlush();
+}

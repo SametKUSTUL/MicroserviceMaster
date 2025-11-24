@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using OrderService.Application.Commands;
@@ -14,6 +15,7 @@ public class CreateOrderHandlerTests
 {
     private Mock<IOrderRepository> _repositoryMock;
     private Mock<IMessagePublisher> _publisherMock;
+    private Mock<ILogger<CreateOrderHandler>> _loggerMock;
     private CreateOrderHandler _handler;
 
     [SetUp]
@@ -21,8 +23,9 @@ public class CreateOrderHandlerTests
     {
         _repositoryMock = new Mock<IOrderRepository>();
         _publisherMock = new Mock<IMessagePublisher>();
+        _loggerMock = new Mock<ILogger<CreateOrderHandler>>();
         var settings = new MessagingSettings { OrderCreatedRoutingKey = "order.created" };
-        _handler = new CreateOrderHandler(_repositoryMock.Object, _publisherMock.Object, settings);
+        _handler = new CreateOrderHandler(_repositoryMock.Object, _publisherMock.Object, settings, _loggerMock.Object);
     }
 
     [Test]

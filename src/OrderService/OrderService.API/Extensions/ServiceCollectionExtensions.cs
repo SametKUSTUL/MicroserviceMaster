@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using OrderService.API.BackgroundServices;
 using OrderService.Application.Services;
@@ -55,8 +56,13 @@ public static class ServiceCollectionExtensions
         var messagingSettings = configuration.GetSection("Messaging").Get<Application.Configuration.MessagingSettings>() ?? new Application.Configuration.MessagingSettings();
         services.AddSingleton(messagingSettings);
         
+        services.AddValidatorsFromAssembly(typeof(Application.Commands.CreateOrderCommand).Assembly);
+        
         services.AddMediatR(cfg =>
-            cfg.RegisterServicesFromAssembly(typeof(Application.Commands.CreateOrderCommand).Assembly));
+        {
+            cfg.RegisterServicesFromAssembly(typeof(Application.Commands.CreateOrderCommand).Assembly);
+            cfg.AddOpenBehavior(typeof(Application.Behaviors.ValidationBehavior<,>));
+        });
         return services;
     }
 

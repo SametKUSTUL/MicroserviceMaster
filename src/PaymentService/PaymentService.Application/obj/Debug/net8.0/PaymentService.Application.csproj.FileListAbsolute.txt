@@ -13,3 +13,7 @@
 /Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/refint/PaymentService.Application.dll
 /Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/PaymentService.Application.pdb
 /Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/ref/PaymentService.Application.dll
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/PaymentService.Application.Resources.ErrorMessages.resources
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/PaymentService.Application.Resources.ErrorMessages.tr.resources
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/PaymentService.Application.csproj.GenerateResource.cache
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/PaymentService.Application.sourcelink.json
