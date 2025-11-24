@@ -4,13 +4,14 @@ EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["OrderService.API/OrderService.API.csproj", "OrderService.API/"]
-COPY ["OrderService.Application/OrderService.Application.csproj", "OrderService.Application/"]
-COPY ["OrderService.Domain/OrderService.Domain.csproj", "OrderService.Domain/"]
-COPY ["OrderService.Infrastructure/OrderService.Infrastructure.csproj", "OrderService.Infrastructure/"]
-RUN dotnet restore "OrderService.API/OrderService.API.csproj"
+COPY ["Shared/Observability/Observability.csproj", "Shared/Observability/"]
+COPY ["OrderService/OrderService.API/OrderService.API.csproj", "OrderService/OrderService.API/"]
+COPY ["OrderService/OrderService.Application/OrderService.Application.csproj", "OrderService/OrderService.Application/"]
+COPY ["OrderService/OrderService.Domain/OrderService.Domain.csproj", "OrderService/OrderService.Domain/"]
+COPY ["OrderService/OrderService.Infrastructure/OrderService.Infrastructure.csproj", "OrderService/OrderService.Infrastructure/"]
+RUN dotnet restore "OrderService/OrderService.API/OrderService.API.csproj"
 COPY . .
-WORKDIR "/src/OrderService.API"
+WORKDIR "/src/OrderService/OrderService.API"
 RUN dotnet build "OrderService.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

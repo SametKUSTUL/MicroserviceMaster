@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using PaymentService.Application.Services;
 using PaymentService.Domain.Repositories;
@@ -59,8 +60,13 @@ public static class ServiceCollectionExtensions
         var messagingSettings = configuration.GetSection("Messaging").Get<Application.Configuration.MessagingSettings>() ?? new Application.Configuration.MessagingSettings();
         services.AddSingleton(messagingSettings);
         
+        services.AddValidatorsFromAssembly(typeof(Application.Commands.ProcessPaymentCommand).Assembly);
+        
         services.AddMediatR(cfg =>
-            cfg.RegisterServicesFromAssembly(typeof(Application.Commands.ProcessPaymentCommand).Assembly));
+        {
+            cfg.RegisterServicesFromAssembly(typeof(Application.Commands.ProcessPaymentCommand).Assembly);
+            cfg.AddOpenBehavior(typeof(Application.Behaviors.ValidationBehavior<,>));
+        });
         return services;
     }
 }

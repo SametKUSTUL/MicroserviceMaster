@@ -1,8 +1,12 @@
 using Microsoft.EntityFrameworkCore;
+using Observability;
 using OrderService.API.Extensions;
+using OrderService.API.Middleware;
 using OrderService.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddObservability("OrderService");
 
 builder.Services.AddOrderServices(builder.Configuration);
 
@@ -20,7 +24,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseAuthorization();
 app.MapControllers();
 
-app.Run();
+try
+{
+    app.Run();
+}
+finally
+{
+    Serilog.Log.CloseAndFlush();
+}

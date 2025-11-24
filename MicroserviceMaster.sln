@@ -31,11 +31,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderService.Tests", "tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentService.Tests", "tests\PaymentService.Tests\PaymentService.Tests.csproj", "{DC8071BE-B44E-41FD-B9DA-C2C89A42E262}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{B1234567-89AB-CDEF-0123-456789ABCDEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Observability", "src\Shared\Observability\Observability.csproj", "{C2345678-90AB-CDEF-0123-456789ABCDEF}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F8A5E8B1-1234-5678-9ABC-DEF012345678}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
 		docker-compose.development.yml = docker-compose.development.yml
+		docker-compose.observability.yml = docker-compose.observability.yml
 		README.md = README.md
+		README-Observability.md = README-Observability.md
 		.dockerignore = .dockerignore
 	EndProjectSection
 EndProject
@@ -169,6 +175,10 @@ Global
 		{DC8071BE-B44E-41FD-B9DA-C2C89A42E262}.Release|x64.Build.0 = Release|Any CPU
 		{DC8071BE-B44E-41FD-B9DA-C2C89A42E262}.Release|x86.ActiveCfg = Release|Any CPU
 		{DC8071BE-B44E-41FD-B9DA-C2C89A42E262}.Release|x86.Build.0 = Release|Any CPU
+		{C2345678-90AB-CDEF-0123-456789ABCDEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2345678-90AB-CDEF-0123-456789ABCDEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2345678-90AB-CDEF-0123-456789ABCDEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2345678-90AB-CDEF-0123-456789ABCDEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -186,5 +196,7 @@ Global
 		{FF9CA3F8-7FB5-4620-A030-9681B3F72778} = {A0C94347-73E4-1EE9-412B-13A38E3B0A6F}
 		{14FFC8EE-7C64-4316-B32C-ABF1381B97E5} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 		{DC8071BE-B44E-41FD-B9DA-C2C89A42E262} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
+		{B1234567-89AB-CDEF-0123-456789ABCDEF} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{C2345678-90AB-CDEF-0123-456789ABCDEF} = {B1234567-89AB-CDEF-0123-456789ABCDEF}
 	EndGlobalSection
 EndGlobal
