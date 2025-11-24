@@ -23,28 +23,34 @@ public static class ObservabilityExtensions
     {
         var elasticsearchUrl = builder.Configuration["Elasticsearch:Url"] ?? "http://localhost:9200";
 
-        Log.Logger = new LoggerConfiguration()
-            .ReadFrom.Configuration(builder.Configuration)
+        builder.Host.UseSerilog((context, services, configuration) => configuration
+            .MinimumLevel.Information()
+            .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning)
+            .MinimumLevel.Override("System", Serilog.Events.LogEventLevel.Warning)
             .Enrich.FromLogContext()
             .Enrich.WithProperty("ServiceName", serviceName)
             .Enrich.WithMachineName()
             .Enrich.WithEnvironmentName()
             .Enrich.WithSpan()
-            .WriteTo.Console()
+            .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}")
             .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(elasticsearchUrl))
             {
                 AutoRegisterTemplate = true,
-                IndexFormat = $"logs-{serviceName.ToLower()}-{{0:yyyy.MM.dd}}",
-                NumberOfShards = 2,
-                NumberOfReplicas = 1
-            })
-            .CreateLogger();
+                AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv8,
+                IndexFormat = $"{serviceName.ToLower()}-logs-{{0:yyyy.MM.dd}}",
+                NumberOfShards = 1,
+                NumberOfReplicas = 0,
+                EmitEventFailure = EmitEventFailureHandling.WriteToSelfLog,
+                TypeName = null
+            }));
 
-        builder.Host.UseSerilog();
+        Serilog.Debugging.SelfLog.Enable(Console.Error);
     }
 
     private static void AddOpenTelemetry(this WebApplicationBuilder builder, string serviceName)
     {
+        var otlpEndpoint = builder.Configuration["OpenTelemetry:OtlpEndpoint"] ?? "http://localhost:4317";
+
         builder.Services.AddOpenTelemetry()
             .ConfigureResource(resource => resource.AddService(serviceName))
             .WithTracing(tracing =>
@@ -53,7 +59,10 @@ public static class ObservabilityExtensions
                     .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
                     .AddSource(serviceName)
-                    .AddConsoleExporter();
+                    .AddOtlpExporter(options =>
+                    {
+                        options.Endpoint = new Uri(otlpEndpoint);
+                    });
             });
     }
 }
