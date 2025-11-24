@@ -18,3 +18,4 @@
 /Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Infrastructure/obj/Debug/net8.0/OrderService.Infrastructure.genruntimeconfig.cache
 /Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Infrastructure/obj/Debug/net8.0/ref/OrderService.Infrastructure.dll
 /Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Infrastructure/obj/Debug/net8.0/OrderService.Infrastructure.sourcelink.json
+/Users/sametkustul/Repos/MicroserviceMaster/src/OrderService/OrderService.Infrastructure/bin/Debug/net8.0/tr/OrderService.Application.resources.dll

@@ -80,7 +80,7 @@ services:
       - ConnectionStrings__DefaultConnection=Host=postgres;Database=orderdb;Username=postgres;Password=postgres
       - RabbitMQ__Host=rabbitmq
       - Elasticsearch__Url=http://elasticsearch:9200
-      - OpenTelemetry__OtlpEndpoint=http://jaeger:4317
+      - OpenTelemetry__OtlpEndpoint=http://jaeger:4318
     depends_on:
       postgres:
         condition: service_healthy
@@ -103,7 +103,7 @@ services:
       - ConnectionStrings__DefaultConnection=Host=postgres;Database=paymentdb;Username=postgres;Password=postgres
       - RabbitMQ__Host=rabbitmq
       - Elasticsearch__Url=http://elasticsearch:9200
-      - OpenTelemetry__OtlpEndpoint=http://jaeger:4317
+      - OpenTelemetry__OtlpEndpoint=http://jaeger:4318
     depends_on:
       postgres:
         condition: service_healthy

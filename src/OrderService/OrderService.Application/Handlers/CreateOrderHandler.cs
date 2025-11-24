@@ -1,3 +1,4 @@
+using System.Text.Json;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using OrderService.Application.BusinessRules;
@@ -27,6 +28,7 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Order>
     public async Task<Order> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Creating order for CustomerId: {CustomerId}", request.CustomerId);
+        _logger.LogInformation($"CreateOrderCommand : {JsonSerializer.Serialize(request)}");
         
         await ValidateBusinessRulesAsync(request, cancellationToken);
 
@@ -50,6 +52,7 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Order>
         var result = await _repository.AddAsync(order, cancellationToken);
         _logger.LogInformation("Order created with Id: {OrderId}, TotalAmount: {TotalAmount}", result.Id, result.TotalAmount);
         
+        _logger.LogInformation($"Message Publish with : {_settings.OrderCreatedRoutingKey} routing key.");
         await _messagePublisher.PublishAsync(_settings.OrderCreatedRoutingKey, new
         {
             OrderId = result.Id,

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ public class RabbitMqConsumer : IMessageConsumer, IDisposable
     private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<RabbitMqConsumer> _logger;
     private readonly string _queueName;
+    private static readonly ActivitySource ActivitySource = new("PaymentService");
 
     public RabbitMqConsumer(string hostName, string exchangeName, string queueName, string routingKey, IServiceProvider serviceProvider, ILogger<RabbitMqConsumer> logger)
     {
@@ -40,11 +42,34 @@ public class RabbitMqConsumer : IMessageConsumer, IDisposable
             var body = ea.Body.ToArray();
             var message = Encoding.UTF8.GetString(body);
             
+            string? parentId = null;
+            if (ea.BasicProperties?.Headers != null && ea.BasicProperties.Headers.ContainsKey("traceparent"))
+            {
+                parentId = Encoding.UTF8.GetString((byte[])ea.BasicProperties.Headers["traceparent"]);
+            }
+            
+            Activity? activity = null;
+            if (parentId != null)
+            {
+                activity = ActivitySource.StartActivity("RabbitMQ Process Order Created", ActivityKind.Consumer, parentId);
+            }
+            else
+            {
+                activity = ActivitySource.StartActivity("RabbitMQ Process Order Created", ActivityKind.Consumer);
+            }
+            
             try
             {
+                activity?.SetTag("messaging.system", "rabbitmq");
+                activity?.SetTag("messaging.destination", _queueName);
+                
+                _logger.LogInformation("Payment Service Consumer Reading Message: {Message}", message);
                 var orderEvent = JsonSerializer.Deserialize<OrderCreatedEvent>(message);
                 if (orderEvent != null)
                 {
+                    activity?.SetTag("order.id", orderEvent.OrderId);
+                    activity?.SetTag("order.amount", orderEvent.TotalAmount);
+                    
                     using var scope = _serviceProvider.CreateScope();
                     var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
                     
@@ -60,8 +85,13 @@ public class RabbitMqConsumer : IMessageConsumer, IDisposable
             }
             catch (Exception ex)
             {
+                activity?.SetStatus(ActivityStatusCode.Error, ex.Message);
                 _logger.LogError(ex, "Error processing payment message");
                 _channel.BasicNack(ea.DeliveryTag, false, true);
+            }
+            finally
+            {
+                activity?.Dispose();
             }
         };
 

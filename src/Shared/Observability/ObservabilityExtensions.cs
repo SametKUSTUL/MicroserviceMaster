@@ -52,16 +52,35 @@ public static class ObservabilityExtensions
         var otlpEndpoint = builder.Configuration["OpenTelemetry:OtlpEndpoint"] ?? "http://localhost:4317";
 
         builder.Services.AddOpenTelemetry()
-            .ConfigureResource(resource => resource.AddService(serviceName))
+            .ConfigureResource(resource => resource
+                .AddService(serviceName)
+                .AddTelemetrySdk())
             .WithTracing(tracing =>
             {
                 tracing
-                    .AddAspNetCoreInstrumentation()
+                    .SetSampler(new OpenTelemetry.Trace.AlwaysOnSampler())
+                    .AddAspNetCoreInstrumentation(options =>
+                    {
+                        options.RecordException = true;
+                        options.Filter = (httpContext) => !httpContext.Request.Path.StartsWithSegments("/health");
+                    })
                     .AddHttpClientInstrumentation()
+                    .AddEntityFrameworkCoreInstrumentation(options =>
+                    {
+                        options.SetDbStatementForText = true;
+                        options.SetDbStatementForStoredProcedure = true;
+                    })
                     .AddSource(serviceName)
+                    .AddSource("RabbitMQ.Client")
                     .AddOtlpExporter(options =>
                     {
-                        options.Endpoint = new Uri(otlpEndpoint);
+                        var endpoint = otlpEndpoint.Replace(":4317", ":4318");
+                        if (!endpoint.EndsWith("/v1/traces"))
+                        {
+                            endpoint = endpoint.TrimEnd('/') + "/v1/traces";
+                        }
+                        options.Endpoint = new Uri(endpoint);
+                        options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
                     });
             });
     }

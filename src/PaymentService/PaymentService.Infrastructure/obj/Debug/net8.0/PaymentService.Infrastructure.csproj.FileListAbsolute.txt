@@ -17,3 +17,5 @@
 /Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Infrastructure/obj/Debug/net8.0/PaymentService.Infrastructure.pdb
 /Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Infrastructure/obj/Debug/net8.0/PaymentService.Infrastructure.genruntimeconfig.cache
 /Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Infrastructure/obj/Debug/net8.0/ref/PaymentService.Infrastructure.dll
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Infrastructure/bin/Debug/net8.0/tr/PaymentService.Application.resources.dll
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Infrastructure/obj/Debug/net8.0/PaymentService.Infrastructure.sourcelink.json

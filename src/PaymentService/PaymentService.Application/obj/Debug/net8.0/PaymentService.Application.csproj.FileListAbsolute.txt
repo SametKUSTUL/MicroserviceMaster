@@ -17,3 +17,6 @@
 /Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/PaymentService.Application.Resources.ErrorMessages.tr.resources
 /Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/PaymentService.Application.csproj.GenerateResource.cache
 /Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/PaymentService.Application.sourcelink.json
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/bin/Debug/net8.0/tr/PaymentService.Application.resources.dll
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/tr/PaymentService.Application.resources.cs
+/Users/sametkustul/Repos/MicroserviceMaster/src/PaymentService/PaymentService.Application/obj/Debug/net8.0/tr/PaymentService.Application.resources.dll
