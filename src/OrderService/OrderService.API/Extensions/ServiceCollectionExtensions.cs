@@ -7,6 +7,7 @@ using OrderService.Infrastructure.Configuration;
 using OrderService.Infrastructure.Data;
 using OrderService.Infrastructure.Messaging;
 using OrderService.Infrastructure.Repositories;
+using OrderService.Infrastructure.Services;
 
 namespace OrderService.API.Extensions;
 
@@ -14,7 +15,11 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddOrderServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddControllers();
+        services.AddControllers()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+            });
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 
@@ -23,6 +28,7 @@ public static class ServiceCollectionExtensions
         services.AddMessaging(configuration);
         services.AddMediator(configuration);
         services.AddBackgroundServices();
+        services.AddExternalServices(configuration);
 
         return services;
     }
@@ -56,6 +62,9 @@ public static class ServiceCollectionExtensions
         var messagingSettings = configuration.GetSection("Messaging").Get<Application.Configuration.MessagingSettings>() ?? new Application.Configuration.MessagingSettings();
         services.AddSingleton(messagingSettings);
         
+        services.AddScoped<Application.Factories.IOrderFactory, Application.Factories.OrderFactory>();
+        services.AddScoped<Application.Services.IOrderEventPublisher, Application.EventPublishers.OrderEventPublisher>();
+        
         services.AddValidatorsFromAssembly(typeof(Application.Commands.CreateOrderCommand).Assembly);
         
         services.AddMediatR(cfg =>
@@ -69,6 +78,15 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection AddBackgroundServices(this IServiceCollection services)
     {
         services.AddHostedService<OrderConsumerService>();
+        return services;
+    }
+
+    private static IServiceCollection AddExternalServices(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddHttpClient<IProductService, ProductService>(client =>
+        {
+            client.BaseAddress = new Uri(configuration["ProductService:Url"] ?? "http://localhost:5003");
+        });
         return services;
     }
 }

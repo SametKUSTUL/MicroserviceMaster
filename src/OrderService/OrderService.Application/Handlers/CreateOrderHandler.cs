@@ -1,9 +1,8 @@
-using System.Text.Json;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using OrderService.Application.BusinessRules;
 using OrderService.Application.Commands;
-using OrderService.Application.Configuration;
+using OrderService.Application.Factories;
 using OrderService.Application.Services;
 using OrderService.Domain.Entities;
 using OrderService.Domain.Repositories;
@@ -13,52 +12,32 @@ namespace OrderService.Application.Handlers;
 public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Order>
 {
     private readonly IOrderRepository _repository;
-    private readonly IMessagePublisher _messagePublisher;
-    private readonly MessagingSettings _settings;
+    private readonly IOrderFactory _orderFactory;
+    private readonly IOrderEventPublisher _eventPublisher;
     private readonly ILogger<CreateOrderHandler> _logger;
+    private readonly IProductService _productService;
 
-    public CreateOrderHandler(IOrderRepository repository, IMessagePublisher messagePublisher, MessagingSettings settings, ILogger<CreateOrderHandler> logger)
+    public CreateOrderHandler(IOrderRepository repository, IOrderFactory orderFactory, IOrderEventPublisher eventPublisher, ILogger<CreateOrderHandler> logger, IProductService productService)
     {
         _repository = repository;
-        _messagePublisher = messagePublisher;
-        _settings = settings;
+        _orderFactory = orderFactory;
+        _eventPublisher = eventPublisher;
         _logger = logger;
+        _productService = productService;
     }
 
     public async Task<Order> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Creating order for CustomerId: {CustomerId}", request.CustomerId);
-        _logger.LogInformation($"CreateOrderCommand : {JsonSerializer.Serialize(request)}");
         
         await ValidateBusinessRulesAsync(request, cancellationToken);
 
-        var order = new Order
-        {
-            Id = Guid.NewGuid(),
-            CustomerId = request.CustomerId,
-            Status = OrderStatus.Pending,
-            CreatedAt = DateTime.UtcNow,
-            Items = request.Items.Select(i => new OrderItem
-            {
-                Id = Guid.NewGuid(),
-                ProductId = i.ProductId,
-                Quantity = i.Quantity,
-                Price = i.Price
-            }).ToList()
-        };
-
-        order.TotalAmount = order.Items.Sum(i => i.Price * i.Quantity);
-
+        var order = _orderFactory.CreateOrder(request);
         var result = await _repository.AddAsync(order, cancellationToken);
+        
         _logger.LogInformation("Order created with Id: {OrderId}, TotalAmount: {TotalAmount}", result.Id, result.TotalAmount);
         
-        _logger.LogInformation($"Message Publish with : {_settings.OrderCreatedRoutingKey} routing key.");
-        await _messagePublisher.PublishAsync(_settings.OrderCreatedRoutingKey, new
-        {
-            OrderId = result.Id,
-            CustomerId = result.CustomerId,
-            TotalAmount = result.TotalAmount
-        }, cancellationToken);
+        await _eventPublisher.PublishOrderEventsAsync(result, cancellationToken);
 
         return result;
     }
@@ -71,6 +50,12 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Order>
             new OrderMustHaveItemsRule(request.Items),
             new OrderTotalAmountMustBeValidRule(request.Items)
         };
+
+        foreach (var item in request.Items)
+        {
+            rules.Add(new ProductMustExistRule(_productService, item.ProductId));
+            rules.Add(new ProductStockMustBeSufficientRule(_productService, item.ProductId, item.Quantity));
+        }
 
         await BusinessRuleValidator.ValidateAsync(rules, cancellationToken);
     }
