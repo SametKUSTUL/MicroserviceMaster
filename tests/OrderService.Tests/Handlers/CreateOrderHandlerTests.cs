@@ -18,6 +18,7 @@ public class CreateOrderHandlerTests
     private Mock<IOrderEventPublisher> _eventPublisherMock;
     private Mock<ILogger<CreateOrderHandler>> _loggerMock;
     private Mock<IProductService> _productServiceMock;
+    private Mock<ICustomerService> _customerServiceMock;
     private CreateOrderHandler _handler;
 
     [SetUp]
@@ -28,8 +29,12 @@ public class CreateOrderHandlerTests
         _eventPublisherMock = new Mock<IOrderEventPublisher>();
         _loggerMock = new Mock<ILogger<CreateOrderHandler>>();
         _productServiceMock = new Mock<IProductService>();
+        _customerServiceMock = new Mock<ICustomerService>();
+        
         _productServiceMock.Setup(p => p.ValidateProductAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync(true);
-        _handler = new CreateOrderHandler(_repositoryMock.Object, _orderFactoryMock.Object, _eventPublisherMock.Object, _loggerMock.Object, _productServiceMock.Object);
+        _productServiceMock.Setup(p => p.GetProductAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync(new ProductDto(Guid.NewGuid(), "Test Product", 100, 10.00m));
+        _customerServiceMock.Setup(c => c.CustomerExistsAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync(true);
+        _handler = new CreateOrderHandler(_repositoryMock.Object, _orderFactoryMock.Object, _eventPublisherMock.Object, _loggerMock.Object, _productServiceMock.Object, _customerServiceMock.Object);
     }
 
     [Test]
@@ -39,8 +44,8 @@ public class CreateOrderHandlerTests
             "customer-123",
             new List<OrderItemDto>
             {
-                new("product-1", 2, 10.50m),
-                new("product-2", 1, 25.00m)
+                new(Guid.NewGuid().ToString(), 2, 10.50m),
+                new(Guid.NewGuid().ToString(), 1, 25.00m)
             }
         );
 
@@ -80,7 +85,7 @@ public class CreateOrderHandlerTests
             "customer-456",
             new List<OrderItemDto>
             {
-                new("product-1", 3, 15.00m)
+                new(Guid.NewGuid().ToString(), 3, 15.00m)
             }
         );
 

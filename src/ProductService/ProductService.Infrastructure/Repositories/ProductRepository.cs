@@ -51,7 +51,7 @@ public class ProductRepository : IProductRepository
         var product = await _context.Products.FindAsync(new object[] { id }, cancellationToken);
         if (product != null)
         {
-            product.StockQuantity = quantity;
+            product.StockQuantity -= quantity;
             product.UpdatedAt = DateTime.UtcNow;
             await _context.SaveChangesAsync(cancellationToken);
         }

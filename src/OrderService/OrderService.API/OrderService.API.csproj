@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\Shared\Observability\Observability.csproj" />
+        <ProjectReference Include="..\..\Shared\Middleware\Middleware.csproj" />
         <ProjectReference Include="..\OrderService.Application\OrderService.Application.csproj" />
         <ProjectReference Include="..\OrderService.Infrastructure\OrderService.Infrastructure.csproj" />
     </ItemGroup>

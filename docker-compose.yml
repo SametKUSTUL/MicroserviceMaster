@@ -80,6 +80,7 @@ services:
       - ConnectionStrings__DefaultConnection=Host=postgres;Database=orderdb;Username=postgres;Password=postgres
       - RabbitMQ__Host=rabbitmq
       - ProductService__Url=http://productservice:8080
+      - CustomerService__Url=http://customerservice:8080
       - Elasticsearch__Url=http://elasticsearch:9200
       - OpenTelemetry__OtlpEndpoint=http://jaeger:4318
     depends_on:
@@ -127,6 +128,27 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ConnectionStrings__DefaultConnection=Host=postgres;Database=productdb;Username=postgres;Password=postgres
+      - RabbitMQ__Host=rabbitmq
+      - Elasticsearch__Url=http://elasticsearch:9200
+      - OpenTelemetry__OtlpEndpoint=http://jaeger:4318
+    depends_on:
+      postgres:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_started
+    networks:
+      - microservices
+
+  customerservice:
+    build:
+      context: ./src
+      dockerfile: CustomerService/CustomerService.API/Dockerfile
+    ports:
+      - "5004:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings__DefaultConnection=Host=postgres;Database=customerdb;Username=postgres;Password=postgres
       - Elasticsearch__Url=http://elasticsearch:9200
       - OpenTelemetry__OtlpEndpoint=http://jaeger:4318
     depends_on:

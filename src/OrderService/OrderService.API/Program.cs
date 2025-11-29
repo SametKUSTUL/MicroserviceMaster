@@ -3,6 +3,7 @@ using Observability;
 using OrderService.API.Extensions;
 using OrderService.API.Middleware;
 using OrderService.Infrastructure.Data;
+using Shared.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<RequestResponseLoggingMiddleware>();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseAuthorization();
 app.MapControllers();

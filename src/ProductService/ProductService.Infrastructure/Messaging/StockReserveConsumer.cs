@@ -54,7 +54,7 @@ public class StockReserveConsumer : IMessageConsumer, IDisposable
                     
                     foreach (var item in stockEvent.Items)
                     {
-                        var command = new UpdateStockCommand(Guid.Parse(item.ProductId), -item.Quantity);
+                        var command = new UpdateStockCommand(Guid.Parse(item.ProductId), item.Quantity);
                         await mediator.Send(command, cancellationToken);
                         _logger.LogInformation("Stock decreased for ProductId: {ProductId}, Quantity: {Quantity}", item.ProductId, item.Quantity);
                     }

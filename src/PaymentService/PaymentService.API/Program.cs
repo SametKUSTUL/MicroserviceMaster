@@ -3,6 +3,7 @@ using PaymentService.API.BackgroundServices;
 using PaymentService.API.Extensions;
 using PaymentService.API.Middleware;
 using PaymentService.Infrastructure.Data;
+using Shared.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<RequestResponseLoggingMiddleware>();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseAuthorization();
 app.MapControllers();

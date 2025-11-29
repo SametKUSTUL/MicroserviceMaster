@@ -1,21 +1,20 @@
-using Microsoft.EntityFrameworkCore;
+using CustomerService.API.Extensions;
+using CustomerService.API.Middleware;
+using CustomerService.Infrastructure.Data;
 using Observability;
-using ProductService.API.Extensions;
-using ProductService.API.Middleware;
-using ProductService.Infrastructure.Data;
 using Shared.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddObservability("ProductService");
+builder.AddObservability("CustomerService");
 
-builder.Services.AddProductServices(builder.Configuration);
+builder.Services.AddCustomerServices(builder.Configuration);
 
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<ProductDbContext>();
+    var db = scope.ServiceProvider.GetRequiredService<CustomerDbContext>();
     db.Database.EnsureCreated();
 }
 

@@ -16,14 +16,16 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Order>
     private readonly IOrderEventPublisher _eventPublisher;
     private readonly ILogger<CreateOrderHandler> _logger;
     private readonly IProductService _productService;
+    private readonly ICustomerService _customerService;
 
-    public CreateOrderHandler(IOrderRepository repository, IOrderFactory orderFactory, IOrderEventPublisher eventPublisher, ILogger<CreateOrderHandler> logger, IProductService productService)
+    public CreateOrderHandler(IOrderRepository repository, IOrderFactory orderFactory, IOrderEventPublisher eventPublisher, ILogger<CreateOrderHandler> logger, IProductService productService, ICustomerService customerService)
     {
         _repository = repository;
         _orderFactory = orderFactory;
         _eventPublisher = eventPublisher;
         _logger = logger;
         _productService = productService;
+        _customerService = customerService;
     }
 
     public async Task<Order> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
@@ -47,6 +49,7 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Order>
         var rules = new List<IBusinessRule>
         {
             new CustomerIdMustBeValidRule(request.CustomerId),
+            new CustomerMustExistRule(_customerService, request.CustomerId),
             new OrderMustHaveItemsRule(request.Items),
             new OrderTotalAmountMustBeValidRule(request.Items)
         };

@@ -87,6 +87,12 @@ public static class ServiceCollectionExtensions
         {
             client.BaseAddress = new Uri(configuration["ProductService:Url"] ?? "http://localhost:5003");
         });
+        
+        services.AddHttpClient<ICustomerService, CustomerService>(client =>
+        {
+            client.BaseAddress = new Uri(configuration["CustomerService:Url"] ?? "http://localhost:5004");
+        });
+        
         return services;
     }
 }
