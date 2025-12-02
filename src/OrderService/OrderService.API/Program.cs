@@ -3,12 +3,14 @@ using Observability;
 using OrderService.API.Extensions;
 using OrderService.API.Middleware;
 using OrderService.Infrastructure.Data;
+using Security;
 using Shared.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddObservability("OrderService");
 
+builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddOrderServices(builder.Configuration);
 
 var app = builder.Build();
@@ -27,6 +29,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseMiddleware<RequestResponseLoggingMiddleware>();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 

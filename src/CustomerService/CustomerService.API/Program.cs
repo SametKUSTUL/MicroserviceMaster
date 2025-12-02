@@ -2,12 +2,14 @@ using CustomerService.API.Extensions;
 using CustomerService.API.Middleware;
 using CustomerService.Infrastructure.Data;
 using Observability;
+using Security;
 using Shared.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddObservability("CustomerService");
 
+builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddCustomerServices(builder.Configuration);
 
 var app = builder.Build();
@@ -26,6 +28,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseMiddleware<RequestResponseLoggingMiddleware>();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 

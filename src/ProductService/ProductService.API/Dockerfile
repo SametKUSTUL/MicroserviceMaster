@@ -4,11 +4,13 @@ EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
+COPY ["Shared/Observability/Observability.csproj", "Shared/Observability/"]
+COPY ["Shared/Middleware/Middleware.csproj", "Shared/Middleware/"]
+COPY ["Shared/Security/Security.csproj", "Shared/Security/"]
 COPY ["ProductService/ProductService.API/ProductService.API.csproj", "ProductService/ProductService.API/"]
 COPY ["ProductService/ProductService.Application/ProductService.Application.csproj", "ProductService/ProductService.Application/"]
 COPY ["ProductService/ProductService.Domain/ProductService.Domain.csproj", "ProductService/ProductService.Domain/"]
 COPY ["ProductService/ProductService.Infrastructure/ProductService.Infrastructure.csproj", "ProductService/ProductService.Infrastructure/"]
-COPY ["Shared/Observability/Observability.csproj", "Shared/Observability/"]
 RUN dotnet restore "ProductService/ProductService.API/ProductService.API.csproj"
 COPY . .
 WORKDIR "/src/ProductService/ProductService.API"

@@ -3,12 +3,14 @@ using Observability;
 using ProductService.API.Extensions;
 using ProductService.API.Middleware;
 using ProductService.Infrastructure.Data;
+using Security;
 using Shared.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddObservability("ProductService");
 
+builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddProductServices(builder.Configuration);
 
 var app = builder.Build();
@@ -27,6 +29,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseMiddleware<RequestResponseLoggingMiddleware>();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 

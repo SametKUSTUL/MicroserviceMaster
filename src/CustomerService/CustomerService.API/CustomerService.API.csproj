@@ -21,6 +21,7 @@
         <ProjectReference Include="..\Shared\Observability\Observability.csproj" Condition="Exists('..\Shared\Observability\Observability.csproj')" />
         <ProjectReference Include="..\..\Shared\Middleware\Middleware.csproj" Condition="Exists('..\..\Shared\Middleware\Middleware.csproj')" />
         <ProjectReference Include="..\Shared\Middleware\Middleware.csproj" Condition="Exists('..\Shared\Middleware\Middleware.csproj')" />
+        <ProjectReference Include="..\..\Shared\Security\Security.csproj" />
     </ItemGroup>
 
 </Project>

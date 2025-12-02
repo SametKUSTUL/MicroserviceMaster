@@ -5,6 +5,8 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY ["Shared/Observability/Observability.csproj", "Shared/Observability/"]
+COPY ["Shared/Middleware/Middleware.csproj", "Shared/Middleware/"]
+COPY ["Shared/Security/Security.csproj", "Shared/Security/"]
 COPY ["OrderService/OrderService.API/OrderService.API.csproj", "OrderService/OrderService.API/"]
 COPY ["OrderService/OrderService.Application/OrderService.Application.csproj", "OrderService/OrderService.Application/"]
 COPY ["OrderService/OrderService.Domain/OrderService.Domain.csproj", "OrderService/OrderService.Domain/"]
