@@ -158,6 +158,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ConnectionStrings__DefaultConnection=Host=postgres;Database=customerdb;Username=postgres;Password=postgres
+      - RabbitMQ__Host=rabbitmq
       - Elasticsearch__Url=http://elasticsearch:9200
       - OpenTelemetry__OtlpEndpoint=http://jaeger:4318
       - JwtSettings__SecretKey=MicroserviceMaster-Super-Secret-Key-Min-32-Characters-Long
@@ -165,6 +166,8 @@ services:
       - JwtSettings__Audience=MicroserviceMaster
     depends_on:
       postgres:
+        condition: service_healthy
+      rabbitmq:
         condition: service_healthy
       elasticsearch:
         condition: service_started
@@ -180,12 +183,23 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings__DefaultConnection=Host=postgres;Database=identitydb;Username=postgres;Password=postgres
+      - CustomerService__Url=http://customerservice:8080
+      - RabbitMQ__Host=rabbitmq
+      - RabbitMQ__IdentityExchange=identity_exchange
+      - RabbitMQ__UserRegisteredRoutingKey=user.registered
       - Elasticsearch__Url=http://elasticsearch:9200
       - OpenTelemetry__OtlpEndpoint=http://jaeger:4318
       - JwtSettings__SecretKey=MicroserviceMaster-Super-Secret-Key-Min-32-Characters-Long
       - JwtSettings__Issuer=IdentityService
       - JwtSettings__Audience=MicroserviceMaster
     depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      customerservice:
+        condition: service_started
       elasticsearch:
         condition: service_started
     networks:

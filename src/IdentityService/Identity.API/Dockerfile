@@ -6,6 +6,9 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 COPY ["IdentityService/Identity.API/Identity.API.csproj", "IdentityService/Identity.API/"]
+COPY ["IdentityService/Identity.Application/Identity.Application.csproj", "IdentityService/Identity.Application/"]
+COPY ["IdentityService/Identity.Domain/Identity.Domain.csproj", "IdentityService/Identity.Domain/"]
+COPY ["IdentityService/Identity.Infrastructure/Identity.Infrastructure.csproj", "IdentityService/Identity.Infrastructure/"]
 COPY ["Shared/Security/Security.csproj", "Shared/Security/"]
 COPY ["Shared/Observability/Observability.csproj", "Shared/Observability/"]
 COPY ["Shared/Middleware/Middleware.csproj", "Shared/Middleware/"]

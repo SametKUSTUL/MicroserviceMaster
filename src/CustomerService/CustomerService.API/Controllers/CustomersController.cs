@@ -33,16 +33,23 @@ public class CustomersController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllCustomers([FromQuery] string? customerId, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetAllCustomers([FromQuery] string? customerId, [FromQuery] string? email, CancellationToken cancellationToken)
     {
         if (!string.IsNullOrEmpty(customerId))
         {
             var customer = await _mediator.Send(new GetCustomerByCustomerIdQuery(customerId), cancellationToken);
             return customer == null ? NotFound() : Ok();
         }
+
+        if (!string.IsNullOrEmpty(email))
+        {
+            var result = await _mediator.Send(new GetAllCustomersQuery(), cancellationToken);
+            var customerByEmail = result.FirstOrDefault(c => c.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+            return customerByEmail == null ? NotFound() : Ok(new[] { customerByEmail });
+        }
         
-        var result = await _mediator.Send(new GetAllCustomersQuery(), cancellationToken);
-        return Ok(result);
+        var allCustomers = await _mediator.Send(new GetAllCustomersQuery(), cancellationToken);
+        return Ok(allCustomers);
     }
 
     [HttpPut("{id}")]

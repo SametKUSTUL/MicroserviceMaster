@@ -1,27 +1,21 @@
-using Identity.API.Services;
+using Identity.API.Extensions;
+using Identity.Infrastructure.Data;
 using Observability;
-using Security;
 using Shared.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddObservability("IdentityService");
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Identity API", Version = "v1" });
-});
-
-var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>() 
-                  ?? throw new InvalidOperationException("JwtSettings configuration is missing");
-
-builder.Services.AddSingleton(jwtSettings);
-builder.Services.AddSingleton<JwtTokenGenerator>();
-builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddIdentityServices(builder.Configuration);
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<IdentityDbContext>();
+    db.Database.EnsureCreated();
+}
 
 if (app.Environment.IsDevelopment())
 {
@@ -30,6 +24,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<RequestResponseLoggingMiddleware>();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 try
