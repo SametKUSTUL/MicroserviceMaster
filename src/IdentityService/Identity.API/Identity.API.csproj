@@ -8,10 +8,16 @@
 
     <ItemGroup>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-        <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="MediatR" Version="12.2.0" />
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Identity.Application\Identity.Application.csproj" />
+        <ProjectReference Include="..\Identity.Infrastructure\Identity.Infrastructure.csproj" />
         <ProjectReference Include="..\..\Shared\Security\Security.csproj" />
         <ProjectReference Include="..\..\Shared\Observability\Observability.csproj" />
         <ProjectReference Include="..\..\Shared\Middleware\Middleware.csproj" />

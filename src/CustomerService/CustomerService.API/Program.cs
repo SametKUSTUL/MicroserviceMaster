@@ -1,3 +1,4 @@
+using CustomerService.API.BackgroundServices;
 using CustomerService.API.Extensions;
 using CustomerService.API.Middleware;
 using CustomerService.Infrastructure.Data;
@@ -11,6 +12,7 @@ builder.AddObservability("CustomerService");
 
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddCustomerServices(builder.Configuration);
+builder.Services.AddHostedService<UserRegisteredConsumer>();
 
 var app = builder.Build();
 

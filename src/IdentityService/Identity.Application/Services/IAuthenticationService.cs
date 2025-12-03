@@ -1,4 +1,9 @@
-namespace Identity.API.Models;
+namespace Identity.Application.Services;
+
+public interface IAuthenticationService
+{
+    Task<LoginResponse?> AuthenticateAsync(string email, string password);
+}
 
 public class LoginResponse
 {

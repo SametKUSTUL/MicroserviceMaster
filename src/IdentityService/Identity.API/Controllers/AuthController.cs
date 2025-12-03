@@ -1,5 +1,7 @@
+using Identity.Application.Commands;
+using Identity.Application.Services;
 using Identity.API.Models;
-using Identity.API.Services;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Identity.API.Controllers;
@@ -8,11 +10,16 @@ namespace Identity.API.Controllers;
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
+    private readonly IMediator _mediator;
     private readonly IAuthenticationService _authService;
     private readonly ILogger<AuthController> _logger;
 
-    public AuthController(IAuthenticationService authService, ILogger<AuthController> logger)
+    public AuthController(
+        IMediator mediator,
+        IAuthenticationService authService,
+        ILogger<AuthController> logger)
     {
+        _mediator = mediator;
         _authService = authService;
         _logger = logger;
     }
@@ -35,6 +42,27 @@ public class AuthController : ControllerBase
         _logger.LogInformation("User logged in successfully: {Email}", request.Email);
 
         return Ok(result);
+    }
+
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] RegisterRequest request, CancellationToken cancellationToken)
+    {
+        if (string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Password))
+        {
+            return BadRequest(new { message = "Email and password are required" });
+        }
+
+        try
+        {
+            var command = new RegisterUserCommand(request.Email, request.Password);
+            var result = await _mediator.Send(command, cancellationToken);
+
+            return Ok(new { message = result.Message, email = result.Email, customerId = result.CustomerId });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
     }
 
     [HttpGet("health")]

@@ -1,5 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="All Services" type="CompoundRunConfigurationType">
+    <toRun name="CustomerService.API" type="LaunchSettings" />
+    <toRun name="Identity.API" type="LaunchSettings" />
     <toRun name="OrderService.API" type="LaunchSettings" />
     <toRun name="PaymentService.API" type="LaunchSettings" />
     <toRun name="ProductService.API" type="LaunchSettings" />
